@@ -1,0 +1,113 @@
+body{
+background:#dcdcdc;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+.container{
+width:970px;
+margin:0 auto;
+}
+
+.header{
+background:#6e6e6e;
+padding:5px;
+border-radius:4px;
+border:1px solid black;
+margin-top:10px;
+}
+
+.header img{
+width:100%;
+height:auto;
+display:block;
+}
+
+.orange-bar{
+background:#e6b191;
+padding:8px;
+text-align:center;
+margin:12px 0;
+}
+
+.green-bar{
+background:#8fc79f;
+padding:10px;
+text-align:center;
+font-weight:bold;
+}
+
+.kn{
+font-size:16px;
+}
+
+.en{
+font-size:18px;
+font-weight:bold;
+}
+
+.form-box{
+background:#e9ecef;
+padding:25px;
+margin-top:15px;
+border-radius:5px;
+border:1px solid #bcd6e3;
+}
+
+.captcha-box{
+display:flex;
+align-items:center;
+gap:10px;
+margin-top:10px;
+}
+
+.captcha-box img{
+height:60px;
+}
+
+.refresh{
+cursor:pointer;
+font-size:22px;
+color:#2a6ebb;
+}
+
+.footer{
+background:#3d3d3d;
+color:white;
+padding:12px;
+text-align:center;
+margin-top:25px;
+font-size:14px;
+}
+
+/* Submit button */
+
+.btn-success{
+background:#63b15f;
+border-color:#4cae4c;
+color:black;
+font-weight:500;
+padding:6px 12px;
+font-size:16px;
+height:38px;
+}
+
+
+/* Cancel button */
+
+.btn-danger{
+background:#e06565;
+border-color:#d9534f;
+color:black;
+font-weight:500;
+padding:6px 12px;
+font-size:16px;
+height:38px;
+}
+
+
+/* Button width + spacing */
+
+.btn-block{
+width:100%;
+margin-top:8px;
+}
