@@ -4,13 +4,57 @@
 <head>
 
 <meta charset="UTF-8">
-
 <title>VTU PROVISIONAL RESULT</title>
 
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/style.css">
 
+<style>
+
+#captchaImage{
+font-size:26px;
+font-weight:bold;
+letter-spacing:4px;
+background:#f3f3f3;
+padding:10px;
+border:1px solid #ccc;
+width:180px;
+text-align:center;
+user-select:none;
+}
+
+.refresh{
+cursor:pointer;
+font-size:22px;
+margin-left:10px;
+}
+
+#loadingBox{
+display:none;
+text-align:center;
+margin-top:20px;
+}
+
+.spinner{
+border:6px solid #f3f3f3;
+border-top:6px solid #28a745;
+border-radius:50%;
+width:40px;
+height:40px;
+animation:spin 1s linear infinite;
+margin:auto;
+margin-bottom:10px;
+}
+
+@keyframes spin{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+</style>
+
 </head>
+
 
 <body>
 
@@ -47,7 +91,8 @@ DECEMBER-2025 / JANUARY-2026 EXAMINATION RESULTS
 </div>
 
 
-<div class="form-box">
+
+<div class="form-box" id="formBox">
 
 <input id="usn" class="form-control" placeholder="Enter USN">
 
@@ -57,9 +102,9 @@ DECEMBER-2025 / JANUARY-2026 EXAMINATION RESULTS
 
 <br>
 
-<div class="captcha-box">
+<div style="display:flex;align-items:center">
 
-<img id="captchaImage" src="assets/captcha.png">
+<div id="captchaImage"></div>
 
 <div class="refresh" onclick="generateCaptcha()">↻</div>
 
@@ -73,13 +118,26 @@ DECEMBER-2025 / JANUARY-2026 EXAMINATION RESULTS
 
 <br>
 
-<button class="btn btn-danger btn-block">
+<button class="btn btn-danger btn-block" onclick="clearForm()">
 ರದ್ದುಪಡಿಸಿ / Cancel
 </button>
 
-<div id="output"></div>
+<div id="output" style="margin-top:10px;color:red;font-weight:bold"></div>
 
 </div>
+
+
+
+<div id="loadingBox">
+
+<div class="spinner"></div>
+
+<div style="font-size:18px;font-weight:bold">
+Fetching results from VTU servers...
+</div>
+
+</div>
+
 
 
 <div class="footer">
@@ -91,8 +149,101 @@ DECEMBER-2025 / JANUARY-2026 EXAMINATION RESULTS
 </div>
 
 
-<script src="js/jquery.min.js"></script>
-<script src="js/script.js"></script>
+
+<script>
+
+let captchaText="";
+
+
+function generateCaptcha(){
+
+const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+captchaText="";
+
+for(let i=0;i<5;i++){
+
+captchaText+=chars[Math.floor(Math.random()*chars.length)];
+
+}
+
+document.getElementById("captchaImage").innerText=captchaText;
+
+}
+
+
+
+function clearForm(){
+
+document.getElementById("usn").value="";
+document.getElementById("captchaInput").value="";
+document.getElementById("output").innerText="";
+generateCaptcha();
+
+}
+
+
+
+function checkUSN(){
+
+let usn=document.getElementById("usn").value.trim();
+let captcha=document.getElementById("captchaInput").value.trim();
+
+
+if(usn===""){
+
+document.getElementById("output").innerText="Please enter USN";
+
+return;
+
+}
+
+
+if(captcha===""){
+
+document.getElementById("output").innerText="Please enter captcha";
+
+return;
+
+}
+
+
+if(captcha.toUpperCase()!==captchaText){
+
+document.getElementById("output").innerText="Invalid captcha";
+
+generateCaptcha();
+
+return;
+
+}
+
+
+
+/* show loading screen */
+
+document.getElementById("formBox").style.display="none";
+
+document.getElementById("loadingBox").style.display="block";
+
+
+/* simulate server delay */
+
+setTimeout(function(){
+
+window.location.href="assets/result.png";
+
+},3000);
+
+}
+
+
+
+window.onload=generateCaptcha;
+
+</script>
+
+
 
 </body>
 
